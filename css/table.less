@@ -1,0 +1,79 @@
+@import "style.less";
+.ion-android-checkmark-circle,.ion-ios-trash-outline,.ion-alert-circled{
+	font-size:1.7em !important;
+}
+.rwd-table {
+		 	 background: @color-bg-bright;
+		 	 overflow: hidden;
+		 	 
+			}
+
+			.rwd-table tr:nth-of-type(2n){
+			  background: @color-logo;			  			  
+			  color:@color-text-bright;
+			}
+			.rwd-table th, 
+			.rwd-table td {
+				margin: 0.9em 1em;
+			 
+			 
+			}
+			.rwd-table {
+			  min-width: 100%;
+			}
+
+			.rwd-table th {
+			  display: none;
+			  
+			}
+			.rwd-table tr{
+			border:1px solid @color-border;
+			border-left:2px solid @color-border;
+			}
+			.rwd-table td {
+			  display: block;
+			}
+
+			.rwd-table td:before {
+			  content: attr(data-th) " : ";
+			  font-weight: bold;
+			  width: 6.5em;
+			  display: inline-block;			  
+			  
+			}
+
+			.rwd-table th, .rwd-table td {
+			  text-align: left;
+			  /*text-align:center;*/
+			  
+			}
+
+			.rwd-table th, .rwd-table td:before {
+			  color: @color-text-dark;
+			  font-weight: bold;
+			  
+			}
+
+			@media (min-width: 480px) {
+			  .rwd-table td:before {
+			    display: none;
+			  }
+			 .rwd-table th, .rwd-table td {
+			    display: table-cell;
+			    padding: 0.25em 0.5em;
+			  
+			  }
+			  .rwd-table th:first-child, 
+			  .rwd-table td:first-child {
+			    padding-left: 0;
+			  }
+			  .rwd-table th:last-child, 
+			  .rwd-table td:last-child {
+			    padding-right: 0;
+			  }
+			   .rwd-table th, 
+			   .rwd-table td {
+			    padding: 1em !important;
+			       
+			  }
+			}
