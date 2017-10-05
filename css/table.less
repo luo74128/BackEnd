@@ -1,16 +1,116 @@
 @import "style.less";
-.ion-android-checkmark-circle,.ion-ios-trash-outline,.ion-alert-circled{
+.ion-android-checkmark-circle,
+.ion-ios-trash-outline,
+.ion-alert-circled,
+.ion-android-add-circle{
 	font-size:1.7em !important;
+	cursor:pointer;
 }
+.ion-plus{
+			font-size:1em;
+			border:2px solid;
+			padding:3px 5px;
+			color:@color-text-dark;
+			.rounded-corners;
+			cursor:pointer;
+			z-index:2;
+}
+
+webkit-keyframes scaleout {
+    0% {
+        -webkit-transform: scale(0);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        opacity: 0;
+    }
+}
+@keyframes scaleout {
+    0% {
+        transform: scale(0);
+        -webkit-transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        opacity: 0;
+    }
+}
+
+
+
+
+
+.plus-bg {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: orange;
+    -webkit-transition: -webkit-transform 800ms;
+    transition: transform 800ms;
+    position: relative;
+    text-align: center;
+    z-index: 10;
+}
+.plus-bg:before {
+    content: '';
+    box-shadow: 0px 0px 8px 2px rgba(255, 165, 0, 0.53);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 10px;
+    left: 10px;
+    border-radius: 100%;
+    pointer-events: none;
+    opacity: 1;
+    z-index: 1;
+}
+.plus-bg:after {
+    -webkit-transition: opacity 600ms, -webkit-transform 800ms;
+    transition: opacity 600ms, transform 800ms;
+    content: 'Hover Me';
+    line-height: 100px;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Arial';
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+}
+.plus-bg:hover {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+    -webkit-transition: -webkit-transform 800ms, background-color 800ms;
+    transition: transform 800ms, background-color 800ms;
+}
+.plus-bg:hover:after {
+    -webkit-transform: translate3d(0, -50px, 0);
+    transform: translate3d(0, -50px, 0);
+    opacity: 0;
+}
+.plus-bg:hover:before {
+    -webkit-transition: -webkit-transform 800ms, opacity 1000ms;
+    transition: transform 800ms, opacity 1000ms;
+    -webkit-transform: scale(1.8);
+    -ms-transform: scale(1.8);
+    transform: scale(1.8);
+    opacity: 0;
+}
+
 .rwd-table {
 		 	 background: @color-bg-bright;
 		 	 overflow: hidden;
 		 	 
 			}
 
-			.rwd-table tr:nth-of-type(2n){
+			.rwd-table tr:nth-of-type(2n),.rwd-table tr:nth-of-type(2n) i{
 			  background: @color-logo;			  			  
-			  color:@color-text-bright;
+			  color:@color-text-bright;			 
 			}
 			.rwd-table th, 
 			.rwd-table td {
@@ -27,8 +127,7 @@
 			  
 			}
 			.rwd-table tr{
-			border:1px solid @color-border;
-			border-left:2px solid @color-border;
+				border:2px solid @color-border;			
 			}
 			.rwd-table td {
 			  display: block;
@@ -77,3 +176,25 @@
 			       
 			  }
 			}
+			
+			
+/* Page numner Change Color !important */			
+.pagination>li>a,.pagination>li>span {
+	 
+    color: @color-logo !important;  
+    background-color: @color-text-bright !important;
+    border: 1px solid @color-border !important;
+}
+
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus{
+			
+		    color: @color-text-bright !important;
+		    background-color: @color-logo !important;
+		    border-color: @color-logo !important;
+}

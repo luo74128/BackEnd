@@ -7,9 +7,11 @@
         		 
         		 Notice.toggleClass("lightbox_toggle");
         		 //
+        		 var img = content.slice(content.length-4,content.length);
         		// alert(content);
         		 if(img===".jpg" || img===".png" || img===".gif" || img===".pdf"){
         		 		Titlelabel.html(titletext);
+        		 		ContentText.html("<img src='"+ content +"' width='200' />");
         		 		
         		 		$(".lightbox-close").click(function(){
 		        		 	Notice.removeClass("lightbox_toggle");

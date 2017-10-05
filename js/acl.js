@@ -170,14 +170,19 @@ $(document).ready(function(){
 			return true;
 		}else{
 			that.css("border-color",error_border_color);
-			that.next('.error_text').html('Warning!! Ex:abc@hotmail.com').css("color",error_text_color).css("font-size",error_font_size);			/*錯誤文字*/
+			if(that.val()===""){
+                		that.next('.error_text').html('This field is required').css("color",error_text_color).css("font-size",error_font_size);
+            		}else{
+            			that.next('.error_text').html('Ex:abc@hotmail.com').css("color",error_text_color).css("font-size",error_font_size);			/*錯誤文字*/
+            		}
 			that.removeClass("qualified");
 			return false;
 			//alert('不符合規定');
 		}
 	}
 	function check_text(that){
-		var rule = /^[a-zA-Z0-9\s\,\.\?\!\\\{\}\[\]\@\#\$\%\&\*\&\+\-\;\:\~\`_\u4e00-\u9fa5]+$/;
+		var rule = /^[\u4e00-\u9fa5_a-zA-Z0-9\s\w\d\\\/\*\@\#\%\$\!\~\^\&\*\(\)\:\?\,\.\|\<\>\{\}\[\]\=\-\_\+]+$/;
+    //var rule = "";
 		//that.blur(function(){ //接著當滑鼠從inputform這個對話框移開時，執行...
 			if(rule.test(that.val())){
 				that.addClass("qualified");
@@ -185,15 +190,19 @@ $(document).ready(function(){
 				return true;
 			}else{
 				that.css("border-color",error_border_color);
-				that.next('.error_text').html("Please dont't Enter the [ \" \' \\ \/ \< \> ]").css("color",error_text_color).css("font-size",error_font_size);				
-				/*錯誤文字*/
+				if(that.val()===""){
+            that.next('.error_text').html('This field is required').css("color",error_text_color).css("font-size",error_font_size);
+        }else{
+            that.next('.error_text').html("Do not enter special characters.").css("color",error_text_color).css("font-size",error_font_size);				
+				    	/*錯誤文字*/
+        }
 				that.removeClass("qualified");
 				return false;
 			}
 		//});
 	}
 	function check_password(that){
-		var rule = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
+		var rule = /^[a-zA-Z0-9\w\d\\\/\*\@\#\%\$\!\~\^\&\*\(\)\:\?\,\.\|\<\>\{\}\[\]\=\-\_\+].{4,20}$/;
 		//that.blur(function(){ //接著當滑鼠從inputform這個對話框移開時，執行...
 			if(rule.test(that.val())){
 				that.addClass("qualified");
@@ -201,9 +210,14 @@ $(document).ready(function(){
 				return true;
 			}else{
 				that.css("border-color",error_border_color);
-				that.next('.error_text').html('Error!! Ex: Abc123 ').css("color",error_text_color).css("font-size",error_font_size);
-				/*錯誤文字*/
-			that.removeClass("qualified");
+				if(that.val()===""){
+                    			that.next('.error_text').html('This field is required').css("color",error_text_color).css("font-size",error_font_size);
+                		}else{
+                    			that.next('.error_text').html('Do not enter special characters.  Min 4 words / Max 20 words.').css("color",error_text_color).css("font-size",error_font_size);
+				    /*錯誤文字*/
+               			 }
+                
+			    that.removeClass("qualified");
 				return false;
 			}
 		//});	
@@ -213,13 +227,17 @@ $(document).ready(function(){
 			if (pswd!==that.val()){
 				//alert(pswd);
 				that.css("border-color",error_border_color);
-				that.next('.error_text').html('Password not same.').css("color",error_text_color).css("font-size",error_font_size);
-				/*錯誤文字*/
-				that.removeClass("qualified");
+				if(that.val()===""){
+                    			that.next('.error_text').html('This field is required').css("color",error_text_color).css("font-size",error_font_size);
+                		}else{
+                    			that.next('.error_text').html('Password not same.').css("color",error_text_color).css("font-size",error_font_size);
+				    /*錯誤文字*/
+               			 }
+                that.removeClass("qualified");
 				return false;
 			}else {	
 				that.addClass("qualified");
-				that.next('.error_text').html('');/*錯誤訊息恢復空白*/
+               			that.next('.error_text').html('');/*錯誤訊息恢復空白*/
 				return true;
 			}
 						
@@ -302,21 +320,49 @@ $(document).ready(function(){
 				return false;
 			}
 	}
+	
+        var input_array_val = function input_array_val(array_value){
+            var userid = array_value['userid'].val();
+            var username = array_value['username'].val();
+            var phone = array_value['phone'].val();
+            var street = array_value['street'].val();
+            var suburb = array_value['suburb'].val();
+            var state = array_value['state'].val();
+            var postcode = array_value['postcode'].val();
+            //data:{username:username, phone:phone,street:street,suburb:suburb,state:state,postcode:postcode},
+            $.ajax({
+                url: 'checkout_json.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {userid:userid, username:username, phone:phone, street:street, suburb:suburb, state:state, postcode:postcode},
+                success: function(data){
+                    for (var i = 0; i < data.length; i++) {
+                        alert("name=" + data[i]["欄位名稱"]);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert("Status: " + xhr.status + "\nError: " + thrownError);
+                }
+            });
+            //return array_value;
+        }
+	
+	
 	// button click
 	$('.submit_btn').click(function(){
 		$(this).parents('form').addClass('CheckInputJs');
 		//按鈕送出前幫上一級包含的form表單加上Class.CheckInputJs 
-	  
+	  var input_array = [];
 		$('.CheckInputJs input').each(function(){
 		//按鈕送出前檢查一遍輸入框	
 			if($(this).hasClass("check-input")){
 				if($(this).hasClass("check-email")){check_email($(this));}
-				if($(this).hasClass("check-text")){check_text($(this));}
-				if($(this).hasClass("check-password")){pswd = $(this).val();check_password($(this)); }
+				if($(this).hasClass("check-text")){check_text($(this));input_array[$(this).attr("name")]=$(this);}
+				if($(this).hasClass("check-password")){pswd = $(this).val();check_password($(this));input_array['password']=$(this);}
 				if($(this).hasClass("check-confirm")){check_confirm($(this),pswd);}
-				if($(this).hasClass("check-phone")){check_phone($(this));}
-				if($(this).hasClass("check-number")){check_number($(this));}
-				if($(this).hasClass("check-card")){check_card($(this));}
+				if($(this).hasClass("check-phone")){check_phone($(this));input_array[$(this).attr("name")]=$(this);}
+				if($(this).hasClass("check-number")){check_number($(this));input_array[$(this).attr("name")]=$(this);}
+				if($(this).hasClass("check-card")){check_card($(this));input_array[$(this).attr("name")]=$(this);}
 			}
 			if($(this).hasClass("check-allow-null")){
 				check_allow_null($(this));
@@ -326,7 +372,7 @@ $(document).ready(function(){
 			}
 		});
 		$('.CheckInputJs select').each(function(){
-			if($(this).hasClass("check-select")){check_select($(this));}
+			if($(this).hasClass("check-select")){check_select($(this));input_array[$(this).attr("name")]=$(this);}
 		});
 		//Form下面沒有class = qualified的輸入框邊框都設成紅色	
 		$('.CheckInputJs input:not(.qualified)').each(function(){			
@@ -338,15 +384,29 @@ $(document).ready(function(){
 	  var d = a+b+c;
 	  //alert(a);
 	  if(d===0){
-		   alert("Success");	 
-		   $("form").submit();
-	  }else{
-		   alert("Fail");	 
-		   $("form").submit(false);
+		  
+		  var that = $(this);
+		  var sendtosumbimt = function sendtosumbimt(){
+		  	 that.parents('form').submit();
+		   }
+		  if($(this).parents('form').hasClass("NonSubmit")){
+		  	 input_array_val(input_array);
+		  	 lightbox('Tips !! ','the operation was successfully.');	
+		  }else{
+		  	 sendtosumbimt();
+		  	 //lightbox('Tips !! ','The operation was successfully.', sendtosumbimt);	
+		  }
+		  
+		   
+	  }else{		  
+		   lightbox('Operation notification','Input invalid.');	  
+		   //alert("Fail");	 
+		   //(this).parents('form').submit(false); 
 	  }
 		
 	});
-
+	
+	
 	
 });	/******$(document).ready  END*******/	
 
@@ -454,10 +514,15 @@ $(document).ready(function(){
 
 /*Home 鍵 active*/
 $(document).ready(function () {
-	"use strict";	
 	//alert($("#HomeTitle a").attr("href"));
-	 $(".HomeTitle").each(function(){		
-		if(document.location.pathname.match(/[^\/]+$/)[0]===$(this).children().attr("href")){
+	
+	 $(".HomeTitle").each(function(){
+	 	if(document.location.pathname=="/sedy/"){
+	 		var compare = "index.php";
+	 	}else{
+	 		var	compare = document.location.pathname.match(/[^\/]+$/)[0];
+	 	}		
+		if(compare===$(this).children().attr("href")){
 			$(this).addClass('active');
 		}else{
 			$(this).removeClass('active');
@@ -465,3 +530,20 @@ $(document).ready(function () {
 	});
 });
 
+
+/*Banner Slider*/
+ $(document).ready(function() {
+ 
+ /* $("#owl-demo").owlCarousel({
+      navigation : false, // Show next and prev buttons
+ 			autoPlay:true,
+      slideSpeed : 300,
+      paginationSpeed : 400,
+      items : 1, 
+      itemsDesktop : false,
+      itemsDesktopSmall : false,
+      itemsTablet: false,
+      itemsMobile : false
+  });
+  */
+});	

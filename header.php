@@ -12,13 +12,17 @@
     <link href="css/initial.css" rel="stylesheet"><!--初始化樣式--->
     <link href="css/style.less" rel="stylesheet/less" type="text/css"><!--主樣式-->
     <link href="css/lightbox.less" rel="stylesheet/less" type="text/css"><!--lightbox樣式-->        
+    <link href="css/login.less" rel="stylesheet/less" type="text/css"><!--login-->        
     <link href="css/ionicons.css" rel="stylesheet"><!--圖像字行-->       
-		<script src="js/jquery-1.8.3.min.js"></script>
+		<!--<script src="js/jquery-1.8.3.min.js"></script>-->
+		<script src="js/jquery-2.1.1.min.js"></script>
+		
 <title>Admin</title>
 </head>
 
 <body>
 <?php  include "lightbox.html"; ?>	
+<?php  include "login.php"; ?>	
 <!--http://thevectorlab.net/flatlab/index.html  參考網站-->
  <script>
 	$(document).ready(function(){
@@ -106,9 +110,10 @@
       </div>
       <div id="Account-Menu" class="pull-right">
         <ul class="nav-top">
-	      	<li class="pull-right"><a href="#" class="sigup">Sign Up</a></li>
+	      	<li class="pull-right"><a href="#" class="sigup" onclick="login(signup_selected);">Sign Up</a></li>
 					<li class="pull-right">|</li>
-          <li class="pull-right"><a href="#" class="login">Log In</a></li>
+          <li class="pull-right"><a href="#" class="login" onclick="login(login_selected);">Log In</a></li>
+          <li class="pull-right"><a href="#" class="shop-cart"><i class="icon ion-bag"></i></a></li>          
 		 		</ul> 
       </div>     
     </div>

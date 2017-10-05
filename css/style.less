@@ -13,11 +13,12 @@
 @color-bg-dark:#2a3542;
 @color-bg-dark-bright:#35404d;
 @color-bg-bright:#FFFFFF;
-@color-border:#f0f0f8;
+@color-border:#cbcbd3;
 @color-text-dark:#2e2e2e;
 @color-text-bright:#FFFFFF;
 @color-body-bg:#f1f2f7;
-@color-logo:#F69;
+@color-logo:#337ab7;
+@color-logo-rgba : rgba(51, 122, 183,0.5);
 
 .rounded-corners (@radius: 5px 5px 5px 5px) {
   -webkit-border-radius: @radius;
@@ -25,12 +26,13 @@
    border-radius: @radius;
 }
 
+
 /*Testing Tool*/
 .t_bg_blue{background-color:blue;}
 .t_bg_red{background-color:red;}
 .t_bg_yellow{background-color:yellow;}
-.t_color{color:red}
-.t_color{color:blue}
+.t_color{color:@color-logo;}
+.t_color_blue{color:blue}
 .t_width{width:300px;}
 .t_height{height: 100px;}
 .t_padding_10{pdding:10px;}
@@ -40,6 +42,7 @@
 .ion-navicon{font-size:1.5em;font-weight: bold;}
 .ion-ios-email-outline{font-size:1.5em;}
 .ion-ios-bell-outline{font-size:1.5em;}
+.ion-bag{font-size:1.9em;}
 .logo img{height:18px;}
 .logo h3{color:@color-text-dark;}
 .logo-color{color:@color-logo;}
@@ -123,16 +126,19 @@ header{
 	/*邊光散色散光*/	
 	 -moz-transition:border linear .2s,-moz-box-shadow linear .5s;
 	 -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
-	 outline:none;border-color:rgba(255,102,103,.75);
-	 box-shadow:0 0 8px rgba(255,102,103,.5);
-	 -moz-box-shadow:0 0 8px rgba(255,102,103,.5);
-	 -webkit-box-shadow:0 0 8px rgba(255,102,103,3);
+	 outline:none;
+	 border-color:@color-logo-rgba;
+	 box-shadow:0 0 8px @color-logo-rgba;
+	 -moz-box-shadow:0 0 8px @color-logo-rgba;
+	 -webkit-box-shadow:0 0 8px @color-logo-rgba;
 }
-.login,.sigup{
+.login,.sigup,.shop-cart{
 	border:solid 1px @color-border;
 	padding:10px;	
-	.rounded-corners(15px 15px 15px 15px);
-	
+	.rounded-corners(15px 15px 15px 15px);	
+}
+.shop-cart{
+	padding:14px 8px 8px 8px;
 }
 .login:hover,.sigup:hover{
 	padding:10px 30px;
@@ -142,11 +148,10 @@ header{
 	 -moz-transition:border linear .2s,-moz-box-shadow linear .5s;
 	 -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
 	 outline:none;
-	 border-color:@color-logo;
-	 opacity:0.75; 
-	 box-shadow:0 0 8px rgba(255,102,103,.5);
-	 -moz-box-shadow:0 0 8px rgba(255,102,103,.5);
-	 -webkit-box-shadow:0 0 8px rgba(255,102,103,3);
+	 border-color:@color-logo-rgba;
+	 box-shadow:0 0 8px @color-logo-rgba;
+	 -moz-box-shadow:0 0 8px @color-logo-rgba;
+	 -webkit-box-shadow:0 0 8px @color-logo-rgba;
 }
 
 .search{	
